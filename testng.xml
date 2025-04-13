@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/AppiumProject/Appium">
+        <classes>
+            <class name="FullStackAutomation.AppiumBasics">
+                <methods>
+                    <include name="WifiSettingTest"/>
+                    <include name="LongPressTest"/>
+                    <include name="ScrollGestureTest"/>
+                    <include name="SwipeGestureTest"/>
+                    <include name="DragAndDropGesture"/>
+                    <include name="MiscellaneousActivity"/>
+                    <include name="MiscellaneousActivity_DeviceToLandScapeMode"/>
+                    <include name="MiscellaneousActivity_MobileEventsLikeHomeKeysEtc"/>
+                    <include name="MiscellaneousActivity_LaunchAppViaActivity"/>
+                </methods>
+            </class>
+            <class name="FullStackAutomation.E_CommerceApplication">
+                <methods>
+                    <include name="addDetailsOnLandingPage"/>
+                    <include name="checkToastMessageOnLandingPage"/>
+                    <include name="addItemsToCart"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
