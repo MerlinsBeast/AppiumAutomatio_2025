@@ -1,7 +1,6 @@
-package FullStackAutomation.pageObject;
+package FullStackAutomation.pageObject.android;
 
 import FullStackAutomation.pageObject.utils.AndroidActions;
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;

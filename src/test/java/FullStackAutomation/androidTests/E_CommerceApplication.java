@@ -1,8 +1,9 @@
-package FullStackAutomation;
+package FullStackAutomation.androidTests;
 
-import FullStackAutomation.pageObject.CheckOutPage;
-import FullStackAutomation.pageObject.ItemsPage;
-import FullStackAutomation.pageObject.LandingPage;
+import FullStackAutomation.AndroidBaseTest_eCommerce;
+import FullStackAutomation.pageObject.android.CheckOutPage;
+import FullStackAutomation.pageObject.android.ItemsPage;
+import FullStackAutomation.pageObject.android.LandingPage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
@@ -20,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class E_CommerceApplication extends BaseTest_eCommerce{
+public class E_CommerceApplication extends AndroidBaseTest_eCommerce {
 
     @Test
     public void addDetailsOnLandingPage() throws InterruptedException {
