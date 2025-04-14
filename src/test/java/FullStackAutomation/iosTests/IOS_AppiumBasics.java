@@ -1,11 +1,12 @@
-package FullStackAutomation;
+package FullStackAutomation.iosTests;
 
+import FullStackAutomation.IOS_BaseTest;
+import FullStackAutomation.pageObject.ios.AlertViewPage;
+import FullStackAutomation.pageObject.ios.HomePage;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,23 +15,20 @@ import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.List;
 
-public class IOS_AppiumBasics extends IOS_BaseTest{
+public class IOS_AppiumBasics extends IOS_BaseTest {
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void IOSFirstBasicTest(){
-
-        driver.findElement(AppiumBy.accessibilityId("Alert Views")).click();
-//        driver.findElement(AppiumBy.xpath("//XCUIElementTypeStaticText[@name='Text Entry']")).click();
-        driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == 'Text Entry'`]")).click();
-        driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeCell")).sendKeys("Vijay");
-        driver.findElement(AppiumBy.accessibilityId("OK")).click();
+        HomePage homePage= new HomePage(driver);
+        AlertViewPage alertViewPage=homePage.selectAlertView();
+        alertViewPage.clickOnTextEntryMenu();
+        alertViewPage.EntryDetailsInEntryFieldPopup("Vijay");
+        alertViewPage.clickOkButtonOnPopup();
 //        driver.findElement(AppiumBy.iOSNsPredicateString("type ==  'XCUIElementTypeStaticText' AND value BEGINSWITH[c]   'Confirm'")).click();
         //        driver.findElement(AppiumBy.iOSNsPredicateString("type ==  'XCUIElementTypeStaticText' AND value ENDSWITH[c]   'Confirm'")).click();
-        driver.findElement(AppiumBy.iOSNsPredicateString("type ==  'XCUIElementTypeStaticText' AND value == 'Confirm / Cancel'")).click();
-        String expMessageOnModal=driver.findElement(AppiumBy.iOSNsPredicateString(("value BEGINSWITH[c] 'A message'"))).getText();
-        System.out.println("Message is "+ expMessageOnModal);
-        driver.findElement(AppiumBy.iOSNsPredicateString("label == 'Confirm'")).click();
-
+        alertViewPage.clickOnConfirmCancelMenu();
+        alertViewPage.checkMessageOnConfirmPopupIsAsExpected("A message");
+        alertViewPage.clickOnConfirmButtonOfPopup();
 
     }
 
@@ -81,7 +79,7 @@ public class IOS_AppiumBasics extends IOS_BaseTest{
 
     }
 
-    @Test
+    @Test(enabled = false)
     public void IOS_SwipeGesture_LaunchFromActivity() throws InterruptedException {
         //Similar to package and Activity name we have in android we have bundle ID for IOS applications
         //This bundle Id is mostly provided by the developer

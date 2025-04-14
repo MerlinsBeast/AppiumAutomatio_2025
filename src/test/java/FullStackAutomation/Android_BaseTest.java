@@ -8,20 +8,19 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class BaseTest_eCommerce {
+public class Android_BaseTest {
     public AndroidDriver driver;
     AppiumDriverLocalService service;
 
     @BeforeMethod
-    public void configureAppium() throws MalformedURLException, InterruptedException {
+    public void configureAppium() throws MalformedURLException {
         service= new AppiumServiceBuilder()
                 .withAppiumJS(new File("C:\\Users\\Vijay_Yadav\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
                 .withIPAddress("127.0.0.1")
@@ -30,13 +29,11 @@ public class BaseTest_eCommerce {
         service.start();
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName("VijayEmulator");
-        options.setApp("C:\\AppiumProject\\Appium\\src\\test\\java\\resources\\General-Store.apk");
-        options.setChromedriverExecutable("C:\\AppiumProject\\Appium\\src\\test\\java\\resources\\chromedriver.exe");
+        options.setApp("C:\\AppiumProject\\Appium\\src\\test\\java\\resources\\ApiDemos-debug.apk");
 
 
-        driver= new AndroidDriver(new URL("http://127.0.0.1:4723"),options);
+        driver= new AndroidDriver(new URL("http://0.0.0.0:4723"),options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-//        Thread.sleep(7);
     }
 
     @AfterMethod

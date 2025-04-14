@@ -3,7 +3,7 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="C:/AppiumProject/Appium">
         <classes>
-            <class name="FullStackAutomation.AppiumBasics">
+            <class name="FullStackAutomation.androidTests.AppiumBasics">
                 <methods>
                     <include name="WifiSettingTest"/>
                     <include name="LongPressTest"/>
@@ -16,7 +16,7 @@
                     <include name="MiscellaneousActivity_LaunchAppViaActivity"/>
                 </methods>
             </class>
-            <class name="FullStackAutomation.E_CommerceApplication">
+            <class name="FullStackAutomation.androidTests.E_CommerceApplication">
                 <methods>
                     <include name="addDetailsOnLandingPage"/>
                     <include name="checkToastMessageOnLandingPage"/>

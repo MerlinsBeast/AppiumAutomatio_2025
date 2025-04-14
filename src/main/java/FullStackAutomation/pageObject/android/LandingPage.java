@@ -1,4 +1,4 @@
-package FullStackAutomation.pageObject;
+package FullStackAutomation.pageObject.android;
 
 import FullStackAutomation.pageObject.utils.AndroidActions;
 import io.appium.java_client.android.AndroidDriver;

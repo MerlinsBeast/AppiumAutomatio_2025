@@ -1,10 +1,8 @@
-package FullStackAutomation;
+package FullStackAutomation.androidTests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.testng.annotations.Test;
+import FullStackAutomation.Android_BaseTest_MobileBrowser;
 
-public class MobileBrowserTest  extends BaseTest_MobileBrowser{
+public class MobileBrowserTestAndroid extends Android_BaseTest_MobileBrowser {
 
     /*@Test
     public void launchMobileBrowserOnApp() throws InterruptedException {
