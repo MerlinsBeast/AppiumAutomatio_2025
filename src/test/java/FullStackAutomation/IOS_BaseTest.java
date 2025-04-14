@@ -45,6 +45,24 @@ public class IOS_BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
     }
 
+    public void configureTestApp() throws MalformedURLException {
+        service= new AppiumServiceBuilder()
+                .withAppiumJS(new File("/Users/admin/.volta/bin/volta-shim"))
+                .withIPAddress("127.0.0.1")
+                .usingPort(4723)
+                .build();
+        service.start();
+        XCUITestOptions options= new XCUITestOptions();
+        options.setDeviceName("iPhone 16");
+        options.setApp("/Users/admin/IdeaProjects/AppiumAutomatio_2025/src/test/java/resources/TestApp 3.app");
+        options.setPlatformVersion("18.4");
+        options.setWdaLaunchTimeout(Duration.ofSeconds(20));
+
+
+        driver= new IOSDriver(new URL("http://0.0.0.0:4723"),options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+    }
+
     @AfterMethod
     public void tearDownAppium(){
         driver.quit();
