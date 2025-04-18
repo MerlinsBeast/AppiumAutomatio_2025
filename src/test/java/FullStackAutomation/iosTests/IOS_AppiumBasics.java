@@ -1,6 +1,6 @@
 package FullStackAutomation.iosTests;
 
-import FullStackAutomation.IOS_BaseTest;
+import FullStackAutomation.appiumSetup.IOS_BaseTest;
 import FullStackAutomation.pageObject.ios.AlertViewPage;
 import FullStackAutomation.pageObject.ios.HomePage;
 import com.google.common.collect.ImmutableMap;

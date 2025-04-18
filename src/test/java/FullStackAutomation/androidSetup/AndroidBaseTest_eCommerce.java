@@ -1,6 +1,9 @@
-package FullStackAutomation;
+package FullStackAutomation.androidSetup;
 
+import FullStackAutomation.pageObject.utils.CommonAppiumUtils;
 import com.google.common.collect.ImmutableMap;
+import io.appium.java_client.AppiumBy;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -12,34 +15,52 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.Properties;
 
-public class AndroidBaseTest_eCommerce {
+public class AndroidBaseTest_eCommerce extends CommonAppiumUtils {
     public AndroidDriver driver;
     AppiumDriverLocalService service;
 
-    @BeforeMethod
-    public void configureAppium() throws MalformedURLException, InterruptedException {
-        service= new AppiumServiceBuilder()
+
+
+    @BeforeMethod(alwaysRun = true)
+    public void configureAppium() throws IOException, InterruptedException {
+
+        Properties properties= new Properties();
+        FileInputStream fileInputStream= new FileInputStream(System.getProperty("user.dir")+"/src/main/java/FullStackAutomation/pageObject/resources/data.properties");
+        properties.load(fileInputStream);
+        String android_AppiumPath= properties.get("androidAppiumPath").toString();
+        String ipAddress=  System.getProperty("ipAddress")!=null ? System.getProperty("ipAddress") : properties.get("ipAddress").toString();
+        int port= Integer.parseInt(properties.get("port").toString());
+
+        service= startAppiumServer(android_AppiumPath,ipAddress,port);
+        service.start();
+
+        //above method will take care of starting appium using specific appium server path
+        /*service= new AppiumServiceBuilder()
                 .withAppiumJS(new File("C:\\Users\\Vijay_Yadav\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .build();
-        service.start();
+        service.start();*/
         UiAutomator2Options options = new UiAutomator2Options();
-        options.setDeviceName("VijayEmulator");
+        options.setDeviceName(properties.get("androidDeviceName").toString());
         options.setApp("C:\\AppiumProject\\Appium\\src\\test\\java\\resources\\General-Store.apk");
         options.setChromedriverExecutable("C:\\AppiumProject\\Appium\\src\\test\\java\\resources\\chromedriver.exe");
 
 
-        driver= new AndroidDriver(new URL("http://127.0.0.1:4723"),options);
+        driver= new AndroidDriver(service.getUrl(),options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 //        Thread.sleep(7);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDownAppium(){
         driver.quit();
         service.stop();

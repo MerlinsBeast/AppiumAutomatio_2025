@@ -1,6 +1,6 @@
 package FullStackAutomation.androidTests;
 
-import FullStackAutomation.Android_BaseTest_MobileBrowser;
+import FullStackAutomation.androidSetup.Android_BaseTest_MobileBrowser;
 
 public class MobileBrowserTestAndroid extends Android_BaseTest_MobileBrowser {
 

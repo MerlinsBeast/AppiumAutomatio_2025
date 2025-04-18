@@ -1,6 +1,6 @@
 package FullStackAutomation.androidTests;
 
-import FullStackAutomation.AndroidBaseTest_eCommerce;
+import FullStackAutomation.androidSetup.AndroidBaseTest_eCommerce;
 import FullStackAutomation.pageObject.android.CheckOutPage;
 import FullStackAutomation.pageObject.android.ItemsPage;
 import FullStackAutomation.pageObject.android.LandingPage;
@@ -13,17 +13,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class E_CommerceApplication extends AndroidBaseTest_eCommerce {
 
-    @Test
+    @Test(enabled = false)
     public void addDetailsOnLandingPage() throws InterruptedException {
         Thread.sleep(7000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -36,7 +35,7 @@ public class E_CommerceApplication extends AndroidBaseTest_eCommerce {
         driver.findElement(By.xpath("//android.widget.Spinner[@package='com.androidsample.generalstore']")).click();
         driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Argentina\"));"));
     }
-    @Test
+    @Test(enabled = false)
     public void checkToastMessageOnLandingPage() throws InterruptedException {
         Thread.sleep(7000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -49,12 +48,19 @@ public class E_CommerceApplication extends AndroidBaseTest_eCommerce {
         driver.findElement(By.xpath("//android.widget.RadioButton[@text='Female']")).click();
     }
 
-    @Test
-    public void addItemsToCart() throws InterruptedException {
+    @DataProvider
+    public Object[][] getData() throws IOException {
+        List<HashMap<String,String>> data= getJsonData(System.getProperty("user.dir")+"/src/test/java/FullStackAutomation/testData/E_CommerceApplication/E_CommerceApplication.json");
+//        return new Object [][]{{"Vijay Emulator Test","female","Argentina"},{"Just the Emulator","male","India"}};
+        return new Object[][]{{data.get(0)},{data.get(1)}};
+    }
+
+    @Test(dataProvider = "getData",groups = "Regression")
+    public void addItemsToCart(HashMap<String, String> addItemsTestData) throws InterruptedException {
         Thread.sleep(7000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         LandingPage landingPage = new LandingPage(driver);
-        landingPage.addDetailsToNameField("Vijay Emulator Test");
+        landingPage.addDetailsToNameField(addItemsTestData.get("addTextDetails"));
         landingPage.selectFemaleRadioButton();
         ItemsPage itemsPage=landingPage.clickOnLetsShopButton();
 

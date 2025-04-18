@@ -8,7 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 
-public class IOSActions {
+public class IOSActions extends CommonAppiumUtils{
     IOSDriver driver;
     public IOSActions(IOSDriver driver){
         this.driver=driver;

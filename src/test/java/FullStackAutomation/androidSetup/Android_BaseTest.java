@@ -1,4 +1,4 @@
-package FullStackAutomation;
+package FullStackAutomation.androidSetup;
 
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.android.AndroidDriver;
@@ -8,19 +8,18 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class Android_BaseTest_MobileBrowser {
+public class Android_BaseTest {
     public AndroidDriver driver;
     AppiumDriverLocalService service;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void configureAppium() throws MalformedURLException {
         service= new AppiumServiceBuilder()
                 .withAppiumJS(new File("C:\\Users\\Vijay_Yadav\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
@@ -30,16 +29,14 @@ public class Android_BaseTest_MobileBrowser {
         service.start();
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName("VijayEmulator");
-//        options.setApp("C:\\AppiumProject\\Appium\\src\\test\\java\\resources\\ApiDemos-debug.apk");
-        options.setChromedriverExecutable("C:\\AppiumProject\\Appium\\src\\test\\java\\resources\\chromedriver.exe");
-        options.setCapability("browserName","Chrome");
+        options.setApp("C:\\AppiumProject\\Appium\\src\\test\\java\\resources\\ApiDemos-debug.apk");
 
 
         driver= new AndroidDriver(new URL("http://0.0.0.0:4723"),options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDownAppium(){
         driver.quit();
         service.stop();

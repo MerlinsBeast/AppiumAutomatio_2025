@@ -1,6 +1,6 @@
 package FullStackAutomation.androidTests;
 
-import FullStackAutomation.Android_BaseTest;
+import FullStackAutomation.androidSetup.Android_BaseTest;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.Activity;
